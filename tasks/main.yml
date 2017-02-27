@@ -53,7 +53,6 @@
   file: src={{ spring_boot_user_dir }}/{{ spring_boot_file }} dest=/etc/init.d/{{ spring_boot_application_id }} owner={{ spring_boot_username }} group={{ spring_boot_username }} state=link
 
 - name: "check for systemd dirs"
-  sudo: yes
   local_action: stat path="/usr/lib/systemd/system"
   become: no
   register: systemd_dirs_optional
