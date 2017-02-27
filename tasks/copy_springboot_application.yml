@@ -1,5 +1,5 @@
 - name: "check for spring boot application file"
-  stat: path={{ spring_boot_file_source }}
+  stat: path='../files/{{ spring_boot_file_source }}'
   register: spring_boot_file
   ignore_errors: True
 
