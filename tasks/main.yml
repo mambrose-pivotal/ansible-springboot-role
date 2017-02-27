@@ -19,32 +19,41 @@
   group: name={{ spring_boot_username }}
 
 - name: "create spring-boot user"
+  sudo: yes
   user: name={{ spring_boot_username }} group={{ spring_boot_username }} comment="user for application {{ spring_boot_application_id }}"
 
 - name: "create spring-boot configuration"
+  sudo: yes
   template: src=application.properties.j2 dest={{ spring_boot_user_dir }}/application-{{ spring_boot_profile}}.properties owner={{ spring_boot_username }} group={{ spring_boot_username }}
 
 - name: "create spring-boot initscript configuration"
+  sudo: yes
   template: src=initscript.conf.j2 dest={{ spring_boot_user_dir }}/{{ spring_boot_application_id}}.conf owner={{ spring_boot_username }} group={{ spring_boot_username }}
 
 - name: "check for spring boot file source inside vm"
+  sudo: yes
   include: "copy_springboot_application.yml"
   when: not (spring_boot_file_source is undefined or spring_boot_file_source is none or spring_boot_file_source | trim == '')
 
 - name: "check for local spring boot file source"
+  sudo: yes
   include: "copy_springboot_application_local.yml"
   when: not (spring_boot_file_source_local is undefined or spring_boot_file_source_local is none or spring_boot_file_source_local | trim == '')
 
 - name: "set spring boot file permissions"
+  sudo: yes
   file: path={{ spring_boot_user_dir }}/{{ spring_boot_file }} owner={{ spring_boot_username }} group={{ spring_boot_username }} mode=0755
 
 - name: "create log directory"
+  sudo: yes
   file: path={{ spring_boot_log_folder }} state=directory owner={{ spring_boot_username }} group={{ spring_boot_username }}
 
 - name: "create link for spring-boot service"
+  sudo: yes
   file: src={{ spring_boot_user_dir }}/{{ spring_boot_file }} dest=/etc/init.d/{{ spring_boot_application_id }} owner={{ spring_boot_username }} group={{ spring_boot_username }} state=link
 
 - name: "check for systemd dirs"
+  sudo: yes
   local_action: stat path="/usr/lib/systemd/system"
   become: no
   register: systemd_dirs_optional
