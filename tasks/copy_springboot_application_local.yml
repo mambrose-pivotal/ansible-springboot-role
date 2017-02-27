@@ -1,5 +1,5 @@
 - name: "check for local spring boot application file"
-  local_action: stat path={{ spring_boot_file_source_local }}
+  local_action: stat path="{{ role_path }}/files/{{ spring_boot_file_source_local }}"
   become: no
   register: spring_boot_file_optional
   ignore_errors: True
