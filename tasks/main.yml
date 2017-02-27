@@ -15,8 +15,9 @@
   when: not java8_install_tasks_optional.stat.exists
 
 - name: "create spring-boot group"
+  sudo: yes
   group: name={{ spring_boot_username }}
-  
+
 - name: "create spring-boot user"
   user: name={{ spring_boot_username }} group={{ spring_boot_username }} comment="user for application {{ spring_boot_application_id }}"
 
