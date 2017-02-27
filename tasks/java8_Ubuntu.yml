@@ -1,4 +1,5 @@
 - name: "install java 8"
+  sudo: yes
   apt: name=openjdk-8-jre-headless
   when: ansible_lsb.major_release|int >= 16
 
