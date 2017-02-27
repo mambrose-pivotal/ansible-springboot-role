@@ -4,7 +4,7 @@
   register: spring_boot_file_optional
   ignore_errors: True
 
-- fail: msg="local spring boot file '{{ spring_boot_file_source_local }}' not found"
+- fail: msg="local spring boot file '{{ spring_boot_file_source_local }}' not found at '{{ role_path }}/files/{{ spring_boot_file_source_local }}'
   when: not spring_boot_file_optional.stat.exists
 
 - name: "copy local spring boot file"
