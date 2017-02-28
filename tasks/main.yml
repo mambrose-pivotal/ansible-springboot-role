@@ -71,6 +71,7 @@
   when: systemd_dirs_optional.stat.exists
 
 - name: "enable spring-boot service"
+  sudo: yes
   service: name={{ spring_boot_application_id }} enabled=yes
 
 - name: "start spring-boot service"
