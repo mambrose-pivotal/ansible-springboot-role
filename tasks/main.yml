@@ -100,7 +100,7 @@
   sudo: yes
   service: name={{ spring_boot_application_id }} state=restarted
 
- - name: "wait for application to come up"
+- name: "wait for application to come up"
   uri:
     url: "http://127.0.0.1:{{spring_boot_http_port}}/"
     status_code: 200
