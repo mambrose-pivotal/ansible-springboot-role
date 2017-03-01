@@ -1,14 +1,30 @@
+- name: "DEBUG first in copy_springboot_application file"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - name: "check for spring boot application file"
   stat: path={{ spring_boot_file_source }}
   register: spring_boot_file
   ignore_errors: True
 
+- name: "debug after check for spring boot applicatio file register"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - fail: msg="local spring boot file '{{ spring_boot_file_source }}' not found"
   when: not spring_boot_file.stat.exists
+
+- name: "debug"
+  debug:
+    msg: "AFTER: copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
 
 - name: "copy spring boot file"
   command: cp {{ spring_boot_file_source }} {{ spring_boot_user_dir }}/{{ spring_boot_file }}
   when: spring_boot_file.stat.exists
+
+- name: "debug local spring boot file copy"
+  debug:
+    msg: "AFTER: copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
 
 - debug: msg="spring boot file '{{ spring_boot_file_source }}' not found"
   when: not spring_boot_file.stat.exists
