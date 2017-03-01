@@ -38,10 +38,10 @@
   debug:
     msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
 
-- name: "check for spring boot file source inside vm"
-  sudo: yes
-  include: "copy_springboot_application.yml"
-  when: not (spring_boot_file_source is undefined or spring_boot_file_source is none or spring_boot_file_source | trim == '')
+## - name: "check for spring boot file source inside vm"
+##  sudo: yes
+##  include: "copy_springboot_application.yml"
+##  when: not (spring_boot_file_source is undefined or spring_boot_file_source is none or spring_boot_file_source | trim == '')
 
 - name: "DEBUG AFTER VM BEFORE LOCAL"
   debug:
