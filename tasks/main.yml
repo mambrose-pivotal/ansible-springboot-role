@@ -51,6 +51,7 @@
 - name: "create link for spring-boot service"
   sudo: yes
   file: src={{ spring_boot_user_dir }}/{{ spring_boot_file }} dest=/etc/init.d/{{ spring_boot_application_id }} owner={{ spring_boot_username }} group={{ spring_boot_username }} state=link
+  debug: msg="src was src={{ spring_boot_user_dir }}/{{ spring_boot_file }} "
 
 - name: "check for systemd dirs"
   local_action: stat path="/usr/lib/systemd/system"
@@ -65,6 +66,7 @@
 - name: "set full qualified application executable path fact"
   set_fact:
     spring_boot_file_fq: "{{ shell_output.stdout }}"
+  debug: msg="spring_boot_file_fq is {{ shell_output.stdout }}"
 
 - name: "create spring-boot systemd unit configuration"
   template: src=systemd_unit.conf.j2 dest=/usr/lib/systemd/system/{{ spring_boot_application_id}}.service
