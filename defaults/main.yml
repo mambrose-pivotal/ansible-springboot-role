@@ -5,7 +5,7 @@ spring_boot_file_source: ""
 spring_boot_file_source_local: ""
 
 spring_boot_http_port: 8080
-spring_boot_profile: "default"
+spring_boot_profile: "in-memory"
 
 spring_boot_jdbc_host: "localhost"
 spring_boot_jdbc_db: "{{ spring_boot_application_id }}"
