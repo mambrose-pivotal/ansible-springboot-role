@@ -62,7 +62,7 @@
   shell: readlink -f {{ spring_boot_user_dir }}/{{ spring_boot_file }}
   register: shell_output
 
-- name: "set full qualified application executble path fact"
+- name: "set full qualified application executable path fact"
   set_fact:
     spring_boot_file_fq: "{{ shell_output.stdout }}"
 
@@ -78,11 +78,11 @@
   sudo: yes
   service: name={{ spring_boot_application_id }} state=restarted
 
-- name: "wait for application to come up"
-  uri:
-    url: "http://127.0.0.1:{{spring_boot_http_port}}/"
-    status_code: 200
-  register: result
-  until: result.status == 200
-  retries: 60
-  delay: 10
+# - name: "wait for application to come up"
+#  uri:
+#    url: "http://127.0.0.1:{{spring_boot_http_port}}/"
+#    status_code: 200
+#  register: result
+#  until: result.status == 200
+#  retries: 60
+#  delay: 10
