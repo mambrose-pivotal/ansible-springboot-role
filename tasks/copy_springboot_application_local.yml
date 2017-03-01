@@ -10,4 +10,4 @@
 - name: "copy local spring boot file"
   copy: src={{ spring_boot_file_source_local }} dest={{ spring_boot_user_dir }}/{{ spring_boot_file }} force=True
   debug:
-    msg: "destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+    msg: "copy file destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
