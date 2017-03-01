@@ -1,4 +1,8 @@
 ---
+- name: "DEBUG FIRST MAIN.YML"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - name: "check for java8 install tasks"
   local_action: stat path="{{ role_path }}/tasks/java8_{{ ansible_distribution }}.yml"
   become: no
@@ -30,15 +34,27 @@
   sudo: yes
   template: src=initscript.conf.j2 dest={{ spring_boot_user_dir }}/{{ spring_boot_application_id}}.conf owner={{ spring_boot_username }} group={{ spring_boot_username }}
 
+- name: "DEBUG BEFORE INSIDE VM"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - name: "check for spring boot file source inside vm"
   sudo: yes
   include: "copy_springboot_application.yml"
   when: not (spring_boot_file_source is undefined or spring_boot_file_source is none or spring_boot_file_source | trim == '')
 
+- name: "DEBUG AFTER VM BEFORE LOCAL"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - name: "check for local spring boot file source"
   sudo: yes
   include: "copy_springboot_application_local.yml"
   when: not (spring_boot_file_source_local is undefined or spring_boot_file_source_local is none or spring_boot_file_source_local | trim == '')
+
+- name: "DEBUG AFTER LOCAL"
+  debug:
+    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
 
 - name: "set spring boot file permissions"
   sudo: yes

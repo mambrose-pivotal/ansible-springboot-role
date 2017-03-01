@@ -7,9 +7,13 @@
 #- fail: msg="local spring boot file '{{ spring_boot_file_source_local }}' not found"
 #  when: not spring_boot_file_optional.stat.exists
 
+- name: "debug local spring boot file copy"
+  debug:
+    msg: "BEFORE: copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+
 - name: "copy local spring boot file"
   copy: src={{ spring_boot_file_source_local }} dest={{ spring_boot_user_dir }}/{{ spring_boot_file }} force=True
 
 - name: "debug local spring boot file copy"
   debug:
-    msg: "copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
+    msg: "AFTER: copy file source was {{ spring_boot_file_source_local }} and destination was {{ spring_boot_user_dir }}/{{ spring_boot_file }}"
